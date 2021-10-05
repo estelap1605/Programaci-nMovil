@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practica_2/src/screens/profile_screen.dart';
 import 'package:practica_2/src/utils/color_settings.dart';
 
 class DashBoardScreen extends StatelessWidget {
@@ -14,11 +15,49 @@ class DashBoardScreen extends StatelessWidget {
         child: ListView(
           children: [
           UserAccountsDrawerHeader(
-            accountName: Text('PÉREZ HERNÁNDEZ MARÍA ESTELA'), 
-            accountEmail: Text('perez.estela@itcelaya.edu.mx'),
-            currentAccountPicture: CircleAvatar(
-              //Image.network('URL')
-            child:  Image.asset('assets/logo.png', width: 150,),
+            accountName:
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text('PÉREZ HERNÁNDEZ MARÍA ESTELA'),
+                )
+              ],
+            ),
+            accountEmail:
+            Row(
+            children: <Widget>[
+              Expanded(
+                  child: Text('perez.estela@itcelaya.edu.mx'),
+              ),
+              Expanded(
+                child:  IconButton(
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileScreen()
+                        )
+                    );
+                  },
+                  icon: Icon(Icons.edit, color: Colors.red),
+                  iconSize: 25,
+
+                ),
+              ),
+            ],
+            ),
+            currentAccountPicture: Row(
+              children: <Widget>[
+                Expanded(
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage("assets/logo.png"),
+                    backgroundColor: Colors.green,
+                    radius: 100,
+                  ),
+                ),
+
+              ],
+              mainAxisAlignment: MainAxisAlignment.end,
 
             ),
             decoration: BoxDecoration(
@@ -56,6 +95,16 @@ class DashBoardScreen extends StatelessWidget {
               onTap: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context,'/intenciones');
+              },
+            ),
+            ListTile(
+              title: Text('Notas'),
+              subtitle: Text('CRUD Notas'),
+              leading: Icon(Icons.note),
+              trailing: Icon(Icons.chevron_right),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.pushNamed(context,'/notas');
               },
             )
         ],
